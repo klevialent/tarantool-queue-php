@@ -1,0 +1,20 @@
+{
+  "name": "webdebteam/taranool-queue-php",
+  "description": "tarantool queue php",
+  "keywords": ["tarantool queue php"],
+  "type": "project",
+  "license": "BSD-3-Clause",
+  "minimum-stability": "dev",
+  "require": {
+    "php": ">=5.6.0",
+    "rybakit/msgpack": "^0.2.1",
+    "tarantool/queue": "^0.3.0",
+    "tarantool/client": "^0.2.0",
+    "mailru/queue-processor": "dev-master"
+  },
+  "require-dev": {
+  },
+  "config": {
+    "process-timeout": 1800
+  }
+}
