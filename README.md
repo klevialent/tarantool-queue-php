@@ -52,10 +52,12 @@ Once you have your instance running, you can start by creating a queue object wi
 in the Lua script:
 
 ```php
-use WebDevTeam\TarantoolQueuePhp;
-use Tarantool\Client
+use WebDevTeam\TarantoolQueuePhp\Queue;
+use Tarantool\Client;
+use Tarantool\Client\Connection\StreamConnection;
+use Tarantool\Client\Packer\PurePacker;
 
-$tarantool = new Tarantool();
+$tarantool = new Tarantool(new StreamConnection(), new PurePacker());
 $queue = new Queue($tarantool, 'foobar');
 $queue->put('some data');
 $task = $queue->take();
