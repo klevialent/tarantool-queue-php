@@ -1,6 +1,6 @@
 <?php
 
-namespace Webdevteam\TarantoolQueuePhp;
+namespace WebDevTeam\TarantoolQueuePhp;
 
 use Tarantool\Queue\Task;
 
