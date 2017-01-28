@@ -1,12 +1,14 @@
-# Tarantool Queue Tools For PHP
+# PHP Tarantool queue tools
 
-Compatible with php7.
-Use
-https://github.com/tarantool-php/client
-https://github.com/tarantool-php/queue
-https://github.com/mailru/queue-processor
+Compatible with php7.<br>
+Used<br>
+[tarantool-php/client](https://github.com/tarantool-php/client)<br>
+[tarantool-php/queue](https://github.com/tarantool-php/queue)<br>
+[mailru/queue-processor](https://github.com/mailru/queue-processor)
 
-
+[Tarantool](http://tarantool.org/) is a NoSQL database running in a Lua application server. It integrates
+Lua modules, called [LuaRocks](https://luarocks.org/). This package provides PHP bindings for
+[Tarantool Queue LuaRock](https://github.com/tarantool/queue/).
 
 ## Installation
 
@@ -59,7 +61,6 @@ $queue->put('some data');
 $task = $queue->take();
 echo $task->getId() . ' - ' . $task->getData() . '<br>';
 $queue->ack($task->getId());
-$
 ```
 
 
@@ -222,38 +223,3 @@ In addition, you can specify a key to return only a subset of the array:
 $calls = $queue->stats('calls');
 $total = $queue->stats('tasks.total');
 ```
-
-
-## Tests
-
-The easiest way to run tests is with Docker. First, build an image using the [dockerfile.sh](dockerfile.sh) generator:
-
-```sh
-$ ./dockerfile.sh | docker build -t queue -
-```
-
-Then run Tarantool instance (needed for integration tests):
-
-```sh
-$ docker run -d --name tarantool -v $(pwd):/queue tarantool/tarantool \
-    /queue/tests/Integration/queues.lua
-```
-
-And then run both unit and integration tests:
-
-```sh
-$ docker run --rm --name queue --link tarantool -v $(pwd):/queue -w /queue queue
-```
-
-To run only integration or unit tests, set the `PHPUNIT_OPTS` environment variable
-to either `--testsuite Integration` or `--testsuite Unit` respectively, e.g.:
-
-```sh
-$ docker run --rm --name queue -v $(pwd):/queue -w /queue \
-    -e PHPUNIT_OPTS='--testsuite Unit' queue
-```
-
-
-## License
-
-The library is released under the MIT License. See the bundled [LICENSE](LICENSE) file for details.
