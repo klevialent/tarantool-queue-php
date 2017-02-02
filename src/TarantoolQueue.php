@@ -20,7 +20,7 @@ class TarantoolQueue extends AbstractQueue
     {
         $tarantool = new Tarantool(new StreamConnection(), new PurePacker());
 
-        $queue = new Queue($tarantool, 'foobar');
+        $queue = new Queue($tarantool, $this->name);
 
         $tasks = [];
         while ($limit > 0) {
@@ -29,6 +29,8 @@ class TarantoolQueue extends AbstractQueue
             $tasks[] = new Task($task->getId(), $task->getData());
             $limit--;
         }
+
+        $tarantool->disconnect();
         
         return $tasks;
     }
@@ -40,4 +42,11 @@ class TarantoolQueue extends AbstractQueue
     {
 
     }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    private $name;
 }
