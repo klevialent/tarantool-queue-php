@@ -2,10 +2,59 @@
 
 namespace WebDevTeam\TarantoolQueuePhp;
 
+use Tarantool\Client\Tarantool;
 use Tarantool\Queue\Task;
 
-class Queue
+abstract class Queue
 {
+    abstract function process();
+
+    /**
+     * @return Queue
+     */
+    public static function getInstance()
+    {
+        if (! static::$instance) {
+            $tarantool = new Tarantool(new StreamConnection(), new PurePacker());
+            $className = substr(static::class, strrpos(static::class, '\\') + 1);
+            static::$instance = new static($tarantool, lcfirst(str_replace('Queue', '', $className)));
+        }
+
+        return static::$instance;
+    }
+
+    /**
+     * @param string $name
+     * @return Queue
+     */
+    public static function get($name)
+    {
+        if (! array_key_exists($name, static::$queues)) {
+            $tarantool = new Tarantool(new StreamConnection(), new PurePacker());
+
+            static::$queues[$name] = new FoobarQueue($tarantool, $name);
+        }
+
+        return static::$queues[$name];
+    }
+
+    protected $name;
+
+    /**
+     * @var Queue[]
+     */
+    protected static $queues = [];
+
+    /**
+     * @var Queue
+     */
+    protected static $instance;
+
+//    protected function __construct()
+//    {
+//
+//    }
+
     /**
      * @var \Tarantool\Client\Client
      */
@@ -159,5 +208,25 @@ class Queue
     private function resultTask($command, $args = null)
     {
         return Task::createFromTuple($this->command($command, $args));
+    }
+
+    /**
+     * @param int $limit
+     *
+     * @return Task[]
+     */
+    protected function fetchTasks($limit)
+    {
+        $tasks = [];
+        while ($limit > 0) {
+            if (! ($task = $queue->take())) break;
+
+            $tasks[] = new Task($task->getId(), $task->getData());
+            $limit--;
+        }
+
+        $tarantool->disconnect();
+
+        return $tasks;
     }
 }
