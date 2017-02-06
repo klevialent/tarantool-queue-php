@@ -3,6 +3,7 @@
 namespace WebDevTeam\TarantoolQueuePhp;
 
 use Tarantool\Client\Connection\StreamConnection;
+use Tarantool\Client\Exception\ConnectionException;
 use Tarantool\Client\Packer\PurePacker;
 use Tarantool\Client\Client;
 use Tarantool\Queue\Task;
@@ -42,9 +43,13 @@ abstract class TarantoolQueue extends AbstractQueue
     public function take($timeout = null)
     {
         $args = null === $timeout ? [] : [$timeout];
-        $result = $this->command('take', $args);
+        try {
+            return $this->resultTask('take', $args);
+        } catch (\Tarantool\Client\Exception\Exception $e) {
+            return null;
+        }
 
-        return empty($result) ? null : Task::createFromTuple($result);
+//        return Task::createFromTuple($result);
     }
 
     /**
