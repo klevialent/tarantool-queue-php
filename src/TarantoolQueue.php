@@ -4,7 +4,7 @@ namespace WebDevTeam\TarantoolQueuePhp;
 
 use Tarantool\Client\Connection\StreamConnection;
 use Tarantool\Client\Packer\PurePacker;
-use Tarantool\Client\Tarantool;
+use Tarantool\Client\Client;
 use Tarantool\Queue\Task;
 
 
@@ -15,8 +15,9 @@ abstract class TarantoolQueue extends AbstractQueue
      */
     protected final function createQueue()
     {
-        $tarantool = new Tarantool(new StreamConnection(), new PurePacker());
+        $tarantool = new Client(new StreamConnection(), new PurePacker());
         $className = substr(static::class, strrpos(static::class, '\\') + 1);
+
         return new static(lcfirst(str_replace('Queue', '', $className)), $tarantool);
     }
 
@@ -182,7 +183,7 @@ abstract class TarantoolQueue extends AbstractQueue
     }
 
     /**
-     * @var Tarantool
+     * @var Client
      */
     protected $client;
 }
