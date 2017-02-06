@@ -7,6 +7,7 @@ use Tarantool\Client\Packer\PurePacker;
 use Tarantool\Client\Tarantool;
 use Tarantool\Queue\Task;
 
+
 abstract class TarantoolQueue extends AbstractQueue
 {
     /**
@@ -16,7 +17,7 @@ abstract class TarantoolQueue extends AbstractQueue
     {
         $tarantool = new Tarantool(new StreamConnection(), new PurePacker());
         $className = substr(static::class, strrpos(static::class, '\\') + 1);
-        return new static($tarantool, lcfirst(str_replace('Queue', '', $className)));
+        return new static(lcfirst(str_replace('Queue', '', $className)), $tarantool);
     }
 
     /**
@@ -140,6 +141,27 @@ abstract class TarantoolQueue extends AbstractQueue
     }
 
     /**
+     * @param int $limit
+     *
+     * @return Task[]
+     */
+    public function fetchTasks($limit)
+    {
+        $this->client->connect();
+        $tasks = [];
+        while ($limit > 0) {
+            if (! ($task = $this->take())) break;
+
+            $tasks[] = $task;
+            $limit--;
+        }
+
+        $this->client->disconnect();
+
+        return $tasks;
+    }
+
+    /**
      * @param string $command
      * @param array $args
      * @return array
@@ -157,26 +179,6 @@ abstract class TarantoolQueue extends AbstractQueue
     private function resultTask($command, $args = null)
     {
         return Task::createFromTuple($this->command($command, $args));
-    }
-
-    /**
-     * @param int $limit
-     *
-     * @return Task[]
-     */
-    protected function fetchTasks($limit)
-    {
-        $tasks = [];
-        while ($limit > 0) {
-            if (! ($task = $this->take())) break;
-
-            $tasks[] = new Task($task->getId(), $task->getData());
-            $limit--;
-        }
-
-        $this->client->disconnect();
-
-        return $tasks;
     }
 
     /**
