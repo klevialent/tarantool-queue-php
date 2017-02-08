@@ -3,7 +3,6 @@
 namespace WebDevTeam\TarantoolQueuePhp;
 
 use Tarantool\Client\Connection\StreamConnection;
-use Tarantool\Client\Exception\ConnectionException;
 use Tarantool\Client\Packer\PurePacker;
 use Tarantool\Client\Client;
 use Tarantool\Queue\Task;
@@ -48,8 +47,6 @@ abstract class TarantoolQueue extends AbstractQueue
         } catch (\Tarantool\Client\Exception\Exception $e) {
             return null;
         }
-
-//        return Task::createFromTuple($result);
     }
 
     /**
