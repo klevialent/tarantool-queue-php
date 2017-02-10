@@ -4,11 +4,11 @@ Compatible with php7.<br>
 Used<br>
 [tarantool-php/client](https://github.com/tarantool-php/client)<br>
 [tarantool-php/queue](https://github.com/tarantool-php/queue)<br>
-[mailru/queue-processor](https://github.com/mailru/queue-processor)
 
 [Tarantool](http://tarantool.org/) is a NoSQL database running in a Lua application server. It integrates
 Lua modules, called [LuaRocks](https://luarocks.org/). This package provides PHP bindings for
 [Tarantool Queue LuaRock](https://github.com/tarantool/queue/).
+
 
 ## Installation
 
@@ -16,6 +16,12 @@ The recommended way to install the library is through [Composer](http://getcompo
 
 ```sh
 $ composer require webdevteam/tarantool-queue-php
+```
+
+QueueProcessController compatible only with yii2, and if you want to use it:
+
+```sh
+$ composer require yiisoft/yii2
 ```
 
 
@@ -48,21 +54,25 @@ $ sudo tarantoolctl start queues
 
 ## Working with queue
 
-Once you have your instance running, you can start by creating a queue object with the queue (tube) name you defined
-in the Lua script:
+See example and extend TarantoolQueue
 
-```php
-use WebDevTeam\TarantoolQueuePhp\Queue;
-use Tarantool\Client;
-use Tarantool\Client\Connection\StreamConnection;
-use Tarantool\Client\Packer\PurePacker;
+```
+$queue = FoobarQueue::getInstance();
+```
 
-$tarantool = new Tarantool(new StreamConnection(), new PurePacker());
-$queue = new Queue($tarantool, 'foobar');
-$queue->put('some data');
-$task = $queue->take();
-echo $task->getId() . ' - ' . $task->getData() . '<br>';
-$queue->ack($task->getId());
+
+### ProsessQueue
+
+Implement method process() of AbstractQueue and run it as demon.<br>If you use yii2
+
+```
+//add to config
+    'controllerMap' => [
+        'queue-process' => WebDevTeam\TarantoolQueuePhp\QueueProcessController::className(),
+    ],
+
+//console command
+php yii queue-process foobar
 ```
 
 
@@ -82,9 +92,6 @@ $queue->put(['foo' => ['bar' => ['baz' => null]]]);
 
 
 ### Tasks
-
-Most of the [Queue API](src/Queue.php) methods return back
-a [Task](src/Task.php) object containing the following getters:
 
 ```php
 Task::getId()
@@ -127,10 +134,8 @@ The method returns either a [Task](#tasks) object or `null`:
 
 ```php
 $task = $queue->take();
-
 // wait 2 seconds
 $task = $queue->take(2);
-
 // wait 100 milliseconds
 $task = $queue->take(.1);
 ```
