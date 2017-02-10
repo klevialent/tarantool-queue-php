@@ -17,5 +17,5 @@ class QueueProcessController extends \yii\console\Controller
         $queueClass::getInstance()->process();
     }
 
-    private $queuesNamespace = '\\common\\queues';
+    protected $queuesNamespace = '\\common\\queues';
 }
