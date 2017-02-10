@@ -5,6 +5,10 @@ namespace WebDevTeam\TarantoolQueuePhp;
 
 abstract class AbstractQueue
 {
+    abstract protected function createQueue();
+    
+    abstract public function process();
+    
     /**
      * @return static
      */
@@ -17,22 +21,25 @@ abstract class AbstractQueue
         return static::$instance;
     }
 
-    abstract public function process();
-
+    /**
+     * @param String $name
+     * @param $client
+     */
     protected final function __construct($name, $client)
     {
         $this->name = $name;
         $this->client = $client;
     }
-
-    abstract protected function createQueue();
-
+    
     /**
-     * @var AbstractQueue
+     * @var static
      */
     protected static $instance;
 
     protected $client;
 
+    /**
+     * @var String
+     */
     protected $name;
 }
