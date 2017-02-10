@@ -1,6 +1,6 @@
 <?php
 
-namespace WebDevTeam\example;
+namespace WebDevTeam\TarantoolQueuePhp\example;
 
 use WebDevTeam\TarantoolQueuePhp\TarantoolQueue;
 

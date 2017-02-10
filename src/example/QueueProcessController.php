@@ -1,6 +1,6 @@
 <?php
 
-namespace WebDevTeam\example;
+namespace WebDevTeam\TarantoolQueuePhp\example;
 
 use Symfony\Component\Console\Exception\InvalidArgumentException;
 
