@@ -6,20 +6,34 @@ use Tarantool\Client\Connection\StreamConnection;
 use Tarantool\Client\Packer\PurePacker;
 use Tarantool\Client\Client;
 use Tarantool\Queue\Task;
+use yii\base\Object;
 
 
-abstract class TarantoolQueue extends AbstractQueue
+class TarantoolQueue extends Object
 {
-    /**
-     * @return static
-     */
-    protected final function createQueue()
+    public function __construct(Client $client, $name)
     {
-        $tarantool = new Client(new StreamConnection(), new PurePacker());
-        $className = substr(static::class, strrpos(static::class, '\\') + 1);
-
-        return new static(lcfirst(str_replace('Queue', '', $className)), $tarantool);
+        parent::__construct();
+        
+        $this->client = $client;
+        $this->name = $name;
     }
+
+//    /**
+//     * @return static
+//     */
+//    public static final function createQueue($name)
+//    {
+//        
+//        
+//        $client = new Client(new StreamConnection(), new PurePacker());
+//        
+//        return new self()
+//            
+//        $className = substr(static::class, strrpos(static::class, '\\') + 1);
+//
+//        return new static(lcfirst(str_replace('Queue', '', $className)), $tarantool);
+//    }
 
     /**
      * @param mixed      $data
@@ -187,5 +201,7 @@ abstract class TarantoolQueue extends AbstractQueue
     /**
      * @var Client
      */
-    protected $client;
+    private $client;
+    
+    private $name;
 }
