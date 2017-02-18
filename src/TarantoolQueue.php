@@ -2,38 +2,15 @@
 
 namespace WebDevTeam\TarantoolQueuePhp;
 
-use Tarantool\Client\Connection\StreamConnection;
-use Tarantool\Client\Packer\PurePacker;
-use Tarantool\Client\Client;
 use Tarantool\Queue\Task;
-use yii\base\Object;
 
-
-class TarantoolQueue extends Object
+class TarantoolQueue
 {
-    public function __construct(Client $client, $name)
+    public function __construct($name, ClientInterface $client)
     {
-        parent::__construct();
-        
         $this->client = $client;
         $this->name = $name;
     }
-
-//    /**
-//     * @return static
-//     */
-//    public static final function createQueue($name)
-//    {
-//        
-//        
-//        $client = new Client(new StreamConnection(), new PurePacker());
-//        
-//        return new self()
-//            
-//        $className = substr(static::class, strrpos(static::class, '\\') + 1);
-//
-//        return new static(lcfirst(str_replace('Queue', '', $className)), $tarantool);
-//    }
 
     /**
      * @param mixed      $data
@@ -199,7 +176,7 @@ class TarantoolQueue extends Object
     }
 
     /**
-     * @var Client
+     * @var ClientInterface
      */
     private $client;
     
