@@ -1,6 +1,6 @@
 <?php
 
-namespace WebDevTeam\TarantoolQueuePhp;
+namespace WebDevTeam\TarantoolQueuePhp\yii;
 
 class QueueProcessController extends \yii\console\Controller
 {
@@ -12,7 +12,7 @@ class QueueProcessController extends \yii\console\Controller
             throw new \InvalidArgumentException("Unknown worker for queue \"$queueName\". You must define class \"$worker\".");
         }
 
-        $worker::process();
+        (new $worker())->process();
     }
 
     public $queuesNamespace = '\\console\\workers';
