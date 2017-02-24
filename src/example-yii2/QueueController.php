@@ -2,6 +2,7 @@
 
 namespace tucibi\tarantoolQueuePhp\example;
 
+use yii;
 
 class QueueController
 {
@@ -11,7 +12,7 @@ class QueueController
 
         echo $rand . '<br>';
 
-        $task = FoobarQueue::getInstance()->put($value . $rand);
+        $task = Yii::$app->queue->foobar->put($value . $rand);
 
         echo $task->getId() . ' - ' . $task->getData() . ' - ' . $task->getState() . '<br>';
     }

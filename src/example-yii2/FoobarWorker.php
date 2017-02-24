@@ -1,15 +1,19 @@
 <?php
 
-namespace tucibi\tarantoolQueuePhp\example;
+namespace console\workers;
 
+use tucibi\tarantoolQueuePhp\yii\AbstractWorker;
 use tucibi\tarantoolQueuePhp\TarantoolQueue;
 
-class FoobarQueue extends TarantoolQueue
+/**
+ * @property TarantoolQueue $queue
+ */
+class FoobarWorker extends AbstractWorker
 {
     public function process()
     {
         while (true) {
-            $task = $this->take();
+            $task = $this->queue->take();
             if (empty($task)) {
                 $this->client->disconnect();
                 echo 'sleep' . PHP_EOL;
@@ -19,7 +23,7 @@ class FoobarQueue extends TarantoolQueue
 
             echo $task->getId() . ' : ' . $task->getData() . ' : ' . $task->getState() . PHP_EOL;
 
-            $this->ack($task->getId());
+            $this->queue->ack($task->getId());
         }
     }
 }
