@@ -1,6 +1,6 @@
 <?php
 
-namespace WebDevTeam\TarantoolQueuePhp;
+namespace tucibi\tarantoolQueuePhp;
 
 interface WorkerInterface
 {

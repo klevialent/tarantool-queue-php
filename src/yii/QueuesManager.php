@@ -1,8 +1,8 @@
 <?php
 
-namespace WebDevTeam\TarantoolQueuePhp\yii;
+namespace tucibi\tarantoolQueuePhp\yii;
 
-use WebDevTeam\TarantoolQueuePhp\ClientInterface;
+use tucibi\tarantoolQueuePhp\ClientInterface;
 
 class QueuesManager extends \yii\base\Component
 {

@@ -1,5 +1,5 @@
 {
-  "name": "webdevteam/tarantool-queue-php",
+  "name": "tucibi/tarantool-queue-php",
   "description": "tarantool queue php",
   "keywords": ["tarantool queue php"],
   "type": "project",
@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "WebDevTeam\\TarantoolQueuePhp\\": "src"
+      "tucibi\\tarantoolQueuePhp\\": "src"
     }
   },
   "config": {

@@ -1,8 +1,8 @@
 <?php
 
-namespace WebDevTeam\TarantoolQueuePhp\example;
+namespace tucibi\tarantoolQueuePhp\example;
 
-use WebDevTeam\TarantoolQueuePhp\TarantoolQueue;
+use tucibi\tarantoolQueuePhp\TarantoolQueue;
 
 class FoobarQueue extends TarantoolQueue
 {

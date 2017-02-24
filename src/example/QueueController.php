@@ -1,6 +1,6 @@
 <?php
 
-namespace WebDevTeam\TarantoolQueuePhp\example;
+namespace tucibi\tarantoolQueuePhp\example;
 
 
 class QueueController

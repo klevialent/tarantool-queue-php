@@ -1,12 +1,12 @@
 <?php
 
-namespace WebDevTeam\TarantoolQueuePhp\yii;
+namespace tucibi\tarantoolQueuePhp\yii;
 
-use Yii;
-use Yii\base\Object;
-use WebDevTeam\TarantoolQueuePhp\QueueInterface;
-use WebDevTeam\TarantoolQueuePhp\ClientInterface;
-use WebDevTeam\TarantoolQueuePhp\WorkerInterface;
+use yii;
+use yii\base\Object;
+use tucibi\tarantoolQueuePhp\QueueInterface;
+use tucibi\tarantoolQueuePhp\ClientInterface;
+use tucibi\tarantoolQueuePhp\WorkerInterface;
 
 /**
  * @property string $queueName

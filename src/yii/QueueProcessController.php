@@ -1,6 +1,6 @@
 <?php
 
-namespace WebDevTeam\TarantoolQueuePhp\yii;
+namespace tucibi\tarantoolQueuePhp\yii;
 
 class QueueProcessController extends \yii\console\Controller
 {

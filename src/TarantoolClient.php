@@ -1,6 +1,6 @@
 <?php
 
-namespace WebDevTeam\TarantoolQueuePhp;
+namespace tucibi\tarantoolQueuePhp;
 
 class TarantoolClient extends \Tarantool\Client\Client implements ClientInterface
 {
@@ -47,5 +47,5 @@ class TarantoolClient extends \Tarantool\Client\Client implements ClientInterfac
 
     const DEFAULT_CONNECTION_CLASS = \Tarantool\Client\Connection\StreamConnection::class;
     const DEFAULT_PACKER_CLASS = \Tarantool\Client\Packer\PurePacker::class;
-    const DEFAULT_QUEUE_CLASS = \WebDevTeam\TarantoolQueuePhp\TarantoolQueue::class;
+    const DEFAULT_QUEUE_CLASS = \tucibi\tarantoolQueuePhp\TarantoolQueue::class;
 }
