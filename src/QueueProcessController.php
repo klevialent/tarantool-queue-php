@@ -6,14 +6,14 @@ class QueueProcessController extends \yii\console\Controller
 {
     public function actionIndex($queueName)
     {
-        $queueClass = $this->queuesNamespace . '\\' . ucfirst($queueName) . 'Queue';
+        $worker = $this->queuesNamespace . '\\' . ucfirst($queueName);
 
-        if (! class_exists($queueClass)) {
-            throw new \InvalidArgumentException("Unknown queue \"$queueName\". You must define class \"$queueClass\".");
+        if (! class_exists($worker)) {
+            throw new \InvalidArgumentException("Unknown worker for queue \"$queueName\". You must define class \"$worker\".");
         }
 
-        $queueClass::getInstance()->process();
+        $worker::process();
     }
 
-    protected $queuesNamespace = '\\common\\queues';
+    public $queuesNamespace = '\\console\\workers';
 }

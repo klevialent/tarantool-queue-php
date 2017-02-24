@@ -14,6 +14,11 @@ class TarantoolQueue implements QueueInterface
         $this->client = $client;
         $this->name = $name;
     }
+    
+    public function getClient()
+    {
+        return $this->client;
+    }
 
     /**
      * @param mixed      $data
