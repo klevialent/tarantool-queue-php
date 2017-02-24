@@ -1,6 +1,6 @@
 <?php
 
-namespace tucibi\tarantoolQueuePhp\example;
+namespace frontend\controllers;
 
 use yii;
 
