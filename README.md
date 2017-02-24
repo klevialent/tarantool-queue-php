@@ -15,7 +15,7 @@ Lua modules, called [LuaRocks](https://luarocks.org/). This package provides PHP
 The recommended way to install the library is through [Composer](http://getcomposer.org):
 
 ```sh
-$ composer require webdevteam/tarantool-queue-php
+$ composer require tucibi/tarantool-queue-php
 ```
 
 QueueProcessController compatible only with yii2, and if you want to use it:
@@ -54,16 +54,16 @@ $ sudo tarantoolctl start queues
 
 ## Working with queue
 
-See example and extend TarantoolQueue
+See example-yii or read more.
 
 ```
-$queue = FoobarQueue::getInstance();
+$queue = Yii::$app->queue->foobar;
 ```
 
 
 ### ProsessQueue
 
-Implement method process() of AbstractQueue and run it as demon.<br>If you use yii2
+Implement method process() of WorkerInterface and run it as demon.<br>If you use yii2
 
 ```
 //add to config
