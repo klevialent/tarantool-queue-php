@@ -2,11 +2,11 @@
 
 namespace WebDevTeam\TarantoolQueuePhp\yii;
 
-use WebDevTeam\TarantoolQueuePhp\WorkerInterface;
 use Yii;
-use yii\base\Object;
+use Yii\base\Object;
 use WebDevTeam\TarantoolQueuePhp\QueueInterface;
 use WebDevTeam\TarantoolQueuePhp\ClientInterface;
+use WebDevTeam\TarantoolQueuePhp\WorkerInterface;
 
 /**
  * @property string $queueName
