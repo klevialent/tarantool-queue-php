@@ -5,7 +5,19 @@ namespace WebDevTeam\TarantoolQueuePhp;
 interface ClientInterface
 {
     /**
-     * @param $funcName
+     * @param array|string $option
+     * @return ClientInterface
+     */
+    public static function createObject($option);
+
+    /**
+     * @param string $name
+     * @return QueueInterface   
+     */
+    public function getQueue($name);
+    
+    /**
+     * @param string $funcName
      * @param array $args
      * @return mixed
      */

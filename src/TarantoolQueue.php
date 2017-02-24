@@ -4,8 +4,11 @@ namespace WebDevTeam\TarantoolQueuePhp;
 
 use Tarantool\Queue\Task;
 
-class TarantoolQueue
+class TarantoolQueue implements QueueInterface
 {
+    /**
+     * @inheritdoc
+     */
     public function __construct($name, ClientInterface $client)
     {
         $this->client = $client;
