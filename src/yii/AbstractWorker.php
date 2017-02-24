@@ -37,7 +37,7 @@ abstract class AbstractWorker extends Object implements WorkerInterface
     
     public function getQueueName()
     {
-        return lcfirst(substr($this->className(), strrpos($this->className(), '\\') + 1));
+        return str_replace('Worker', '', lcfirst(substr($this->className(), strrpos($this->className(), '\\') + 1)));
     }
     
     private $_queue;
