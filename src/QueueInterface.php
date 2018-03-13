@@ -1,6 +1,6 @@
 <?php
 
-namespace tucibi\tarantoolQueuePhp;
+namespace Klevialent\TarantoolQueuePhp;
 
 interface QueueInterface
 {

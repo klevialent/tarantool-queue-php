@@ -2,8 +2,8 @@
 
 namespace console\workers;
 
-use tucibi\tarantoolQueuePhp\yii\AbstractWorker;
-use tucibi\tarantoolQueuePhp\TarantoolQueue;
+use Klevialent\TarantoolQueuePhp\yii\AbstractWorker;
+use Klevialent\TarantoolQueuePhp\TarantoolQueue;
 
 /**
  * @property TarantoolQueue $queue

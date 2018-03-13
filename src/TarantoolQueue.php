@@ -1,6 +1,6 @@
 <?php
 
-namespace tucibi\tarantoolQueuePhp;
+namespace Klevialent\TarantoolQueuePhp;
 
 use Tarantool\Queue\Task;
 

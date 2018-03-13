@@ -15,7 +15,7 @@ Lua modules, called [LuaRocks](https://luarocks.org/). This package provides PHP
 The recommended way to install the library is through [Composer](http://getcomposer.org):
 
 ```sh
-$ composer require tucibi/tarantool-queue-php
+$ composer require klevialent/tarantool-queue-php
 ```
 
 QueueProcessController compatible only with yii2, and if you want to use it:

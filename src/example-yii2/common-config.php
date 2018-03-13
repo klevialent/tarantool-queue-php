@@ -5,17 +5,17 @@ $config = [
         
         //minimal
         'queue' => [
-            'class' => \tucibi\tarantoolQueuePhp\yii\QueuesManager::className(),
-            'client' => \tucibi\tarantoolQueuePhp\TarantoolClient::class,
+            'class' => \Klevialent\TarantoolQueuePhp\yii\QueuesManager::className(),
+            'client' => \Klevialent\TarantoolQueuePhp\TarantoolClient::class,
             'queues' => ['foobar'],
         ],
         
         //extended with defaults
         'queueExtended' => [
-            'class' => \tucibi\tarantoolQueuePhp\yii\QueuesManager::className(),
+            'class' => \Klevialent\TarantoolQueuePhp\yii\QueuesManager::className(),
             'client' => [
-                'class' => \tucibi\tarantoolQueuePhp\TarantoolClient::class,
-                'queue' => \tucibi\tarantoolQueuePhp\TarantoolQueue::class,
+                'class' => \Klevialent\TarantoolQueuePhp\TarantoolClient::class,
+                'queue' => \Klevialent\TarantoolQueuePhp\TarantoolQueue::class,
                 'connection' => [
                     'class' => \Tarantool\Client\Connection\StreamConnection::class,
                     'url' => 'tcp://127.0.0.1:3301',
